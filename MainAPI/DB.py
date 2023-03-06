@@ -1,6 +1,12 @@
 import psycopg2 
 from psycopg2.extras import RealDictCursor
 import os
+# PGSQL TO SQLITE 변환할지 고민중. 과연 PGSQL까지 필요할까?
+# 일단, 팀원들에게는 blackbox로 함수를 제공하자. 
+# 그편이 수정등에 용이할 것으로 보인다.
+# 어차피 코딩을 모르는 상황이라서, SQL쪽은 내가 전임하는 것으로 하자.
+# 그렇다면, 어떤 제공을 해야하는가? 명세서 작성이 중요할듯.
+# 일단, mocule 단계에서 DB를 응용케하고, 이 함수에서는 DB를 불러오는데 의의를 다하자.
 
 class DB:
     setting = {
@@ -34,7 +40,8 @@ class DB:
             cursor.close() 
             db.close()
         return row
-
+    
+    # 대규모 업데이트시 용하는 함수. 
     def update_object(self,table_name:str,index_key:str,update:dict) :
         query = 'UPDATE ' + table_name + ' SET '
 
